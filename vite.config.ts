@@ -10,6 +10,9 @@ export default defineConfig({
   server: {
     cors: true,
   },
+  build: {
+    minify: false
+  },
   plugins: [
     react(),
     autoZip('cct-chrome.zip', './dist', './release'),
@@ -30,6 +33,12 @@ export default defineConfig({
           background: {
             scripts: ["src/command/copyButton.js"]
           },
+          content_scripts: [
+            {
+              "matches": ["<all_urls>"],
+              "js": ["src/page/content-script.js"]
+            }
+          ],
           icons: {
             "16": "icons/favicon-16x16.png",
             "32": "icons/favicon-32x32.png",
