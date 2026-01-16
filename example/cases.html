@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unicode Cleaner – Plugin Test</title>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #f6f7f9;
+        padding: 20px;
+      }
+
+      .case {
+        background: #fff;
+        border-radius: 8px;
+        padding: 16px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+      }
+
+      .title {
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .expect {
+        font-size: 13px;
+        color: #555;
+        margin-bottom: 10px;
+      }
+
+      .copy-source {
+        border: 1px dashed #aaa;
+        padding: 10px;
+        background: #fafafa;
+        cursor: text;
+        user-select: text;
+        margin-bottom: 10px;
+      }
+
+      textarea {
+        width: 100%;
+        height: 60px;
+        font-family: monospace;
+      }
+
+      .hint {
+        font-size: 12px;
+        color: #0a7;
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Hidden / Control -->
+    <div class="case">
+      <div class="title">Caso 1 – Hidden / Control</div>
+      <div class="expect">
+        El texto parece normal, pero contiene ZERO WIDTH SPACE. Cópialo usando
+        el plugin.
+      </div>
+      <div class="copy-source">
+        Texto con&#8203; caracteres&#8203; invisibles entre&#8203; palabras
+      </div>
+      <textarea
+        placeholder="Pega aquí el texto copiado con el plugin"
+      ></textarea>
+    </div>
+
+    <!-- Space -->
+    <div class="case">
+      <div class="title">Caso 2 – Unicode Spaces</div>
+      <div class="expect">Contiene NON-BREAKING SPACE (U+00A0).</div>
+      <div class="copy-source">Texto con espacios normales aparentemente</div>
+      <textarea placeholder="Pega aquí el texto limpio"></textarea>
+    </div>
+
+    <!-- Quotes -->
+    <div class="case">
+      <div class="title">Caso 3 – Quotes</div>
+      <div class="expect">Usa comillas “inteligentes”.</div>
+      <div class="copy-source">“Texto con comillas”</div>
+      <textarea placeholder="Resultado esperado: comillas normales"></textarea>
+    </div>
+
+    <!-- Dashes -->
+    <div class="case">
+      <div class="title">Caso 4 – Dashes</div>
+      <div class="expect">Usa en dash / em dash.</div>
+      <div class="copy-source">Texto – con — guiones</div>
+      <textarea placeholder="Resultado esperado: guiones simples"></textarea>
+    </div>
+
+    <!-- Full Width -->
+    <div class="case">
+      <div class="title">Caso 5 – Full Width</div>
+      <div class="expect">Caracteres ASCII en versión full-width.</div>
+      <div class="copy-source">Ｈｅｌｌｏ！Ｗｏｒｌｄ！</div>
+      <textarea placeholder="Resultado esperado: Hello! World!"></textarea>
+    </div>
+
+    <!-- Variation -->
+    <div class="case">
+      <div class="title">Caso 6 – Variation Selectors</div>
+      <div class="expect">Emoji con variation selector (VS16).</div>
+      <div class="copy-source">✌️</div>
+      <textarea placeholder="Resultado esperado: ✌"></textarea>
+    </div>
+  </body>
+</html>
