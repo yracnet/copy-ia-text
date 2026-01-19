@@ -21,9 +21,18 @@ export default defineConfig({
       {
         manifest: {
           manifest_version: 2,
-          name: "Copy Clean Text",
-
+          name: "Copy IA Text",
+          description: "Copies text from ChatGPT and other AI tools while removing hidden characters inserted for source tracing, ensuring clean and plain text output.",
           version: "1.0.0",
+          browser_specific_settings: {
+            gecko: {
+              id: "copy-ia-text@yracnet.dev",
+              data_collection_permissions: {
+                required: ["none"],
+                optional: []
+              }
+            }
+          },
           permissions: [
             "storage",
             "contextMenus",

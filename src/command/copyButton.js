@@ -4,33 +4,18 @@ const browserAPI = window.chrome ?? window.browser;
 
 browserAPI.runtime.onInstalled.addListener(() => {
   browserAPI.contextMenus.create({
-    id: "copy-clean-unicode",
-    title: "Copy Clean Text",
+    id: "copy-ia-text",
+    title: "Copy IA Text",
     contexts: ["selection"],
   });
 });
 
 browserAPI.contextMenus.onClicked.addListener(async (info, tab) => {
-  if (info.menuItemId !== "copy-clean-unicode") return;
+  if (info.menuItemId !== "copy-ia-text") return;
   const cleaned = cleanText(info.selectionText);
   browserAPI.tabs.sendMessage(tab.id, {
-    action: "cct-copy",
+    action: "copy-ia-text",
     text: cleaned,
     raw: info.selectionText,
   });
 });
-
-// browserAPI.contextMenus.onClicked.addListener(async (info, tab) => {
-//   console.log(">>>>", info);
-//   const text = info.selectionText;
-//   if (!text) return;
-
-//   if (info.menuItemId === "copy-clean-unicode") {
-//     try {
-//       const cleaned = cleanText(text);
-//       await navigator.clipboard.writeText(cleaned);
-//     } catch (err) {
-//       console.log("No se pudo copiar el texto:", err);
-//     }
-//   }
-// });
