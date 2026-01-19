@@ -1,73 +1,58 @@
-# React + TypeScript + Vite
+# Copy IA Text
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Copy IA Text** is a browser extension that allows you to copy text from ChatGPT and other AI tools while automatically removing hidden or invisible characters. Many AI platforms insert special characters to trace the origin of text or preserve formatting. This extension ensures you get clean, plain, readable text every time.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+- Copy text from AI tools like ChatGPT without hidden or invisible tracking characters.
+- Automatically removes unwanted Unicode characters inserted by AI platforms.
+- Works entirely locally in your browser — **no data is collected, stored, or transmitted**.
+- Supports context menu and clipboard copy.
+- Cross-browser: Chrome and Firefox compatible.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Chrome
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. Go to `chrome://extensions/` in your browser.
+2. Enable **Developer mode** (top-right corner).
+3. Click **Load unpacked** and select the project folder.
+4. The extension should now appear in your toolbar.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Firefox
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. Go to `about:debugging#/runtime/this-firefox`.
+2. Click **Load Temporary Add-on**.
+3. Select `manifest.json` in the project folder.
+4. The extension will appear in your toolbar.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> For permanent installation, submit the extension to the [Firefox Add-ons Store](https://addons.mozilla.org/).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Usage
+
+1. Navigate to any AI platform (ChatGPT, etc.).
+2. Select the text you want to copy.
+3. Right-click and choose **Copy Clean Text** (or use the provided keyboard shortcut).
+4. Paste anywhere — the text will be clean, without hidden characters.
+
+---
+
+## Development
+
+### Requirements
+
+- Node.js >= 18
+- npm or yarn
+- Vite
+
+### Install dependencies
+
+```bash
+npm install
 ```
