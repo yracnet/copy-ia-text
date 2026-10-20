@@ -1,8 +1,7 @@
 import { defineConfig, type PluginOption } from 'vite'
-import react from '@vitejs/plugin-react-swc'
 import webExtension from '@samrum/vite-plugin-web-extension';
-//@ts-ignore
-import autoZip from 'vite-plugin-auto-zip';
+import zipPlugin from './vite-plugin-zip';
+import pkg from './package.json' with { type: 'json' };
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -14,16 +13,14 @@ export default defineConfig({
     minify: false
   },
   plugins: [
-    react(),
-    autoZip('cct-chrome.zip', './dist', './release'),
-    autoZip('cct-firefox.zip', './dist', './release'),
+    zipPlugin({ fileName: 'copy-ia-text.zip', outDir: 'dist-zip' }),
     webExtension(
       {
         manifest: {
-          manifest_version: 2,
+          manifest_version: 3,
           name: "Copy IA Text",
           description: "Copies text from ChatGPT and other AI tools while removing hidden characters inserted for source tracing, ensuring clean and plain text output.",
-          version: "1.0.0",
+          version: pkg.version,
           browser_specific_settings: {
             gecko: {
               id: "copy-ia-text@yracnet.dev",
@@ -34,13 +31,11 @@ export default defineConfig({
             }
           },
           permissions: [
-            "storage",
             "contextMenus",
-            "clipboardWrite",
-            "activeTab"
+            "clipboardWrite"
           ],
           background: {
-            scripts: ["src/command/copyButton.js"]
+            service_worker: "src/command/copyButton.js"
           },
           content_scripts: [
             {
